@@ -4,4 +4,16 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
-createApp(App).use(store).use(router).mount('#app')
+
+import mitt from 'mitt';
+const emitter = mitt();
+const app = createApp(App)
+app.config.globalProperties.emitter = emitter;
+
+
+
+app
+    .use(router)
+    .use(store)
+
+    .mount("#app");
